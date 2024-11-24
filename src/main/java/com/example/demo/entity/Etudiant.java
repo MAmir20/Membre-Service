@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.DiscriminatorValue;
@@ -8,14 +8,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity @DiscriminatorValue("etd")
+@NoArgsConstructor @AllArgsConstructor
 public class Etudiant extends Membre {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	@NonNull @Temporal(TemporalType.DATE)
 	private Date dateInscription;
 	@NonNull
@@ -32,6 +34,8 @@ public class Etudiant extends Membre {
 		this.diplome = diplome;
 		this.encadrant = encadrant;
 	}
+
+
 	
 	
 }
