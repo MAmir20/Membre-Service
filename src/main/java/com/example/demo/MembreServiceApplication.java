@@ -14,6 +14,7 @@ import com.example.demo.entity.Membre;
 import com.example.demo.repository.EnseignantRepository;
 import com.example.demo.repository.EtudiantRepository;
 import com.example.demo.repository.MembreRepository;
+import com.example.demo.service.IMembreService;
 
 import lombok.AllArgsConstructor;
 
@@ -25,6 +26,9 @@ public class MembreServiceApplication implements CommandLineRunner {
 	EtudiantRepository etudiantRepository;
 	@Autowired
 	EnseignantRepository enseignantRepository;
+	
+	@Autowired
+	IMembreService membreService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MembreServiceApplication.class, args);
@@ -91,16 +95,28 @@ public class MembreServiceApplication implements CommandLineRunner {
 		membreRepository.findAll().forEach(t -> System.out.println(t.getPrenom() + " " + t.getNom()));
 		
 		// Chercher un membre par ID
-		Membre m = membreRepository.findById((long) 2).get();
-		System.out.println(m.getId()+": "+m.getPrenom()+" "+m.getNom());
+		Membre x = membreRepository.findById(3L).get();
+		System.out.println(x.getId()+": "+x.getPrenom()+" "+x.getNom());
 		
 		// Modifier un membre
-		m.setNom("Cherif");
-		membreRepository.saveAndFlush(m);
-		System.out.println(m.getId()+": "+m.getPrenom()+" "+m.getNom());
+		x.setNom("Cherif");
+		membreRepository.saveAndFlush(x);
+		System.out.println(x.getId()+": "+x.getPrenom()+" "+x.getNom());
 		
 		// Supprimer un membre
-		membreRepository.delete(m);
+		membreRepository.delete(x);
 		membreRepository.findAll().forEach(t -> System.out.println(t.getPrenom() + " " + t.getNom()));
+		// Update a Membre
+		Membre m= membreService.findMembre(1L);
+		m.setCv("cv1.pdf");
+		membreService.updateMembre(m);
+		// Delete a Membre
+		membreService.deleteMembre(2L);
+		
+		// Affecter encadrant a un etudiant
+		System.out.println(membreService.affecterEncadrant(1L, 4L));
+		
+		// Afficher Etudiants encadrés par enseignant
+		membreService.afficherEtudiantsEncadres(4L).forEach(t -> System.out.println(t.getPrenom()));
 	}
 }

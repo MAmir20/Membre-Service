@@ -10,10 +10,13 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity @DiscriminatorValue("etd")
 @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
 public class Etudiant extends Membre {
 	/**
 	 * 
