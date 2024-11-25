@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 import com.example.demo.entity.EnseignantChercheur;
 import com.example.demo.entity.Etudiant;
@@ -16,9 +17,8 @@ import com.example.demo.repository.EtudiantRepository;
 import com.example.demo.repository.MembreRepository;
 import com.example.demo.service.IMembreService;
 
-import lombok.AllArgsConstructor;
-
 @SpringBootApplication
+@EnableDiscoveryClient
 public class MembreServiceApplication implements CommandLineRunner {
 	@Autowired
 	MembreRepository membreRepository;
